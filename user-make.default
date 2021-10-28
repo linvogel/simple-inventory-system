@@ -1,0 +1,13 @@
+###############################################################################
+# This file is a template for the user specified behaviour of the deploy
+# make target. In order to provide a deploy script, copy this file
+# to './user-make' and then replace the echo command below with the
+# commands needed to deploy the project to your target machine, as you
+# would in any ordinary makefile.
+# 
+# Author: Linus Vogel <linvogel@student.ethz.ch>
+###############################################################################
+
+define USER_DEPLOY
+	@echo Do something here
+endef
