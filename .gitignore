@@ -1,1 +1,9 @@
+# build output
+js/
+
+# node_modules
+node_modules/
+
+# private files
 user-make
+package-lock.json
