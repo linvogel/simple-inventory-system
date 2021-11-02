@@ -1,5 +1,7 @@
 -include user-make
 
+all: clean build run
+
 deploy:
 	$(call USER_DEPLOY)
 
@@ -10,17 +12,19 @@ endef
 endif
 
 clean:
-	gulp clean
+	@echo Cleaning project...
+	@rm -rf ./js/*
 
 build:
-	gulp build
+	@echo Building project...
+	@tsc
 
 run:
-	gulp run
+	@echo Running project...
+	@npm run main
 
 rebuild: clean build
 	
 watch:
-	gulp watch
-
-all: clean build run
+	@echo Starting watch...
+	@gulp watch
