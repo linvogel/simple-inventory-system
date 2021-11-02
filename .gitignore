@@ -7,3 +7,4 @@ node_modules/
 # private files
 user-make
 package-lock.json
+config/config.ini

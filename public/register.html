@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Simple Inventory System Registration</title>
+		<script src="/unauth.js"></script>
+	</head>
+	<body>
+		<h1>Register</h1>
+		<form action="register_user" method="post">
+			<input type="text" name="username" id="username" onkeyup="registerCheck()">
+			<input type="password" name="password" id="password" onkeyup="registerCheck()">
+			<input type="password" name="password_confirm" id="password_confirm" onkeyup="registerCheck()">
+			<input type="submit" value="Register" id="register" disabled>
+		</form>
+		<p id="username_warning" hidden>The username needs to be between 3 and 32 characters long and only contain alpha-numeric characters.</p>
+		<p id="password_warning" hidden>The password needs to be between 8 and 32 characters long and only contain alpha-numeric characters and { [ ] } . , : ; - _ ? ! / & % .</p>
+		<p id="unequal" hidden>The passwords do not match</p>
+	</body>
+</html>

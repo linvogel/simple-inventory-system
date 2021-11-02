@@ -9,7 +9,7 @@ enum LoggerLevel {
 	VERBOSE
 }
 
-var current_log_level: LoggerLevel = LoggerLevel.INFO;
+var current_log_level: LoggerLevel = LoggerLevel.VERBOSE;
 
 function string_of_level(lvl: LoggerLevel) {
 	switch (lvl) {
