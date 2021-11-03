@@ -1,0 +1,26 @@
+.title-line {
+	text-align: center;
+	text-align-last: center;
+	-moz-text-align-last: center;
+	-ms-text-align-last: center;
+}
+
+.subtitle-line {
+	text-align: center;
+	text-align-last: center;
+}
+
+.container-1 {
+	width: 100%;
+	height: 100%;
+}
+
+.block-container {
+	width: 50rem;
+	margin: auto;
+}
+
+.form-register {
+	display: flex;
+	flex-direction: column;
+}

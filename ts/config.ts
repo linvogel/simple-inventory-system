@@ -19,7 +19,7 @@ function setDefault(cfg: {[id: string]: any}, key: string, value: any) {
 
 // read the entire config and set any default values that are omitted.
 export function load_config() {
-	let local_config = {};
+	let local_config: {[id: string]: any} = {};
 	if (existsSync(config_file)) local_config = parse(readFileSync(config_file, "utf-8"));
 	
 	setDefault(local_config, "server.port", 8080);

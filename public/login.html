@@ -2,8 +2,24 @@
 <html>
 	<head>
 		<title>Simple Inventory System Login</title>
+		<link rel="stylesheet" href="/dep/css/materialize.min.css">
+		<link rel="stylesheet" href="unauth.css">
 	</head>
 	<body>
-		<h1>Login</h1>
+		<h2 class="title-line">Simple Inventory System</h1>
+		<h3 class="subtitle-line">Login</h2>
+		<div class="container-1">
+			<div class="block-container">
+				<form action="login_user" method="post" class="form-register">
+					<label for="username" id="form-label">Username:</label>
+					<input type="text" name="username" id="username" class="form-input">
+					<label for="password" id="form-label">Password:</label>
+					<input type="password" name="password" id="password" class="form-input">
+					<input type="submit" value="Login" id="register" class="form-button">
+				</form>
+			</div>
+		</div>
+		<script src="/unauth.js"></script>
+		<script src="/dep/js/materialize.min.js"></script>
 	</body>
 </html>

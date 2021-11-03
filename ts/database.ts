@@ -4,17 +4,37 @@ import { createHash } from 'crypto';
 import * as uuid from 'uuid';
 
 import { config } from './config';
-import { debug, error, info } from './logger';
+import { debug, error, fatal, info } from './logger';
+import { exit } from 'process';
 
-var connectionPool: Pool = new Pool({
-	user: config.database.user,
-	host: config.database.host,
-	database: config.database.database,
-	password: config.database.password,
-	port: config.database.port
-});
+
+var connectionPool: Pool = undefined;
+
+async function initPool() {
+	connectionPool = new Pool({
+		user: config.database.user,
+		host: config.database.host,
+		database: config.database.database,
+		password: config.database.password,
+		port: config.database.port
+	});
+	
+	await initRelations();
+}
+
+async function initRelations() {
+	if (connectionPool === undefined) {
+		fatal("Cannot initiate database connection pool!");
+		exit(1);
+	}
+	
+	let client: PoolClient = await connectionPool.connect();
+	
+	client.query("CREATE TABLE IF NOT EXISTS users (uid UUID, username VARCHAR(32), password_hash TEXT, salt UUID, role TEXT);")
+}
 
 export async function loginUser(username: string, password: string) {
+	if (connectionPool === undefined) await initPool();
 	var user_data = undefined;
 	let client: PoolClient = await connectionPool.connect();
 	try {
@@ -38,6 +58,7 @@ export async function loginUser(username: string, password: string) {
 }
 
 export async function registerUser(username: string, password: string, role: string) {
+	if (connectionPool === undefined) initPool();
 	let client: PoolClient = await connectionPool.connect();
 	
 	try {
@@ -47,7 +68,7 @@ export async function registerUser(username: string, password: string, role: str
 			let salt = uuid.v4();
 			let sha512 = createHash("sha512");
 			let pass_hash = sha512.update(password + salt, "utf-8").digest("hex");
-			let existing = await client.query("INSERT INTO users(uid, username, password_hash, salt, role) VALUES ($1, $2, $3, $4, $5);", [uid, username, pass_hash, salt, role]);
+			await client.query("INSERT INTO users(uid, username, password_hash, salt, role) VALUES ($1, $2, $3, $4, $5);", [uid, username, pass_hash, salt, role]);
 		} else {
 			debug("Attempted to register existing username: " + username);
 		}
